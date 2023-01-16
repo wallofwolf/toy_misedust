@@ -1,0 +1,11 @@
+stationName
+측정소명
+
+dataTime
+측정일시
+
+pm10Value
+PM10 미세먼지 농도
+
+pm25Value
+PM2.5 미세먼지 농도
