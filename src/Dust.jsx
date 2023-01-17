@@ -3,23 +3,33 @@ import { getDusty } from './api';
 import { useQuery } from 'react-query';
 import Loading from './Loading';
 
-const Dust = () => {
+//stationName
+
+const Dust = ({ addresses }) => {
   const { data, isLoading } = useQuery('dustData', getDusty);
-  const dustData = data?.data.response.body.items[5];
-  console.log(isLoading);
+  // const dustData = data?.data.response.body.items[5];
+  const dustData = data?.data.response.body.items;
+  console.log(dustData);
+  console.log(addresses);
 
   if (isLoading === true) {
     return <Loading />;
   }
 
   return (
-    <DustyCard>
-      <LocalName>{dustData?.stationName}</LocalName>
-      <DustyBox>
-        <MiseRate>😷 미세먼지 {dustData?.pm10Value}</MiseRate>
-        <MiseRate>😷 초미세먼지 {dustData?.pm25Value}</MiseRate>
-      </DustyBox>
-    </DustyCard>
+    <div>
+      {dustData
+        .filter((local) => local.stationName === addresses)
+        .map((item) => (
+          <DustyCard key={item.stationName}>
+            <LocalName>{item?.stationName}</LocalName>
+            <DustyBox>
+              <MiseRate>😷 미세먼지 {item?.pm10Value}</MiseRate>
+              <MiseRate>😷 초미세먼지 {item?.pm25Value}</MiseRate>
+            </DustyBox>
+          </DustyCard>
+        ))}
+    </div>
   );
 };
 

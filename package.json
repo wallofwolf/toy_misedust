@@ -45,5 +45,6 @@
   },
   "main": "index.js",
   "author": "wallofwolf <77008335+wallofwolf@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "git@github.com:wallofwolf/toy_misedust.git"
 }

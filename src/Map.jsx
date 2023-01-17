@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import Dust from './Dust';
 
 const { kakao } = window;
 
-const Main = () => {
+const Map = () => {
   const [addresses, setAddresses] = useState('');
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -21,14 +20,13 @@ const Main = () => {
     let coord = new kakao.maps.LatLng(lat, lng);
     let callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
-        const address = result[0].road_address.region_2depth_name;
-        console.log('주소', address);
-        setAddresses(address);
+        const address = result[0].road_address?.region_2depth_name;
+        console.log(address);
+        setAddresses(address)
       }
     };
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
   }
-  return <Dust addresses={addresses} />;
 };
 
-export default Main;
+export default Map;
